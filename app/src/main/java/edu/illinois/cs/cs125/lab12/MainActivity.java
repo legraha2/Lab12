@@ -3,6 +3,9 @@ package edu.illinois.cs.cs125.lab12;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -38,7 +41,14 @@ public final class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        startAPICall();
+        final Button getWeather = findViewById(R.id.getWeather);
+        getWeather.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                Log.d(TAG, "Update weather");
+                startGetWeather();
+            }
+        });
     }
 
     /**
@@ -52,11 +62,11 @@ public final class MainActivity extends AppCompatActivity {
     /**
      * Make a call to the weather API.
      */
-    void startAPICall() {
+    void startGetWeather() {
         try {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                     Request.Method.GET,
-                    "http://api.openweathermap.org/data/2.5/weather?zip=61820,us&appid="
+                    "http://api.openweathermap.org/data/2.5/weather?zip=61820,us&appid=e994593165c667448b1a4d056d8271b9"
                             + BuildConfig.API_KEY,
                     null,
                     new Response.Listener<JSONObject>() {
